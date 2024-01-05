@@ -1,0 +1,12 @@
+version: '3.8'
+services:
+  booking-db:
+    container_name: hotel-booking
+    image: postgres:16
+    environment:
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "26042001"
+      POSTGRES_DB: nestJS-booking
+    ports:
+      - 5432:5432
+ 
