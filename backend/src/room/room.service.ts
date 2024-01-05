@@ -10,14 +10,34 @@ export class RoomService {
         @InjectRepository(Room)
         private readonly roomRepository:Repository<Room>
     ){}
-    async findAll(){
-        return await this.roomRepository.find();
+    async getAll():Promise<Room[]>{
+        return await this.roomRepository.find({
+            relations:{
+                category:true,
+            },
+            select:{
+                category:{
+                    name:true
+                }
+            }
+        });
     }
-    async createRoom(data:RoomDto){
+    async getOneRoom(id:number):Promise<Room>{
+        return await this.roomRepository.findOneBy({id});
+    }
+    async createRoom(data:RoomDto):Promise<Room>{
         const room=new Room();
         room.roomNumber=data.roomNumber;
         room.roomDetail=data.roomDetail;
         room.category=data.category;
         return await this.roomRepository.save(room);
+    }
+    async updateRoom(id:number, data:RoomDto):Promise<Room>{
+        await this.roomRepository.update(id, data);
+        return this.roomRepository.findOneBy({id});
+    }
+    async deleteRoom(id:number):Promise<Object>{
+        await this.roomRepository.delete(id);
+        return {message:"Room detail is deleted successfully"}
     }
 }

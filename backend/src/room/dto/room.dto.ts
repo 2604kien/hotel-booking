@@ -1,7 +1,13 @@
+import {IsNotEmpty, IsNumber, IsString } from "class-validator";
 import { Category } from "src/entities/category.entity";
 
-export interface RoomDto{
-    roomNumber:number,
-    roomDetail:string,
-    category: Category
+export class RoomDto{
+    @IsNumber()
+    @IsNotEmpty()
+    roomNumber:number;
+    @IsString()
+    @IsNotEmpty()
+    roomDetail:string;
+    @IsNotEmpty()
+    category: Category;
 }
