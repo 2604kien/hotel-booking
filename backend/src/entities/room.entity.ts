@@ -1,4 +1,4 @@
-import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { Category } from "./category.entity";
 
 @Entity()
@@ -9,7 +9,7 @@ export class Room {
     @Column()
     roomNumber: number;
 
-    @Column()
+    @Column({nullable:true})
     roomDetail: string;
 
     @ManyToOne(() => Category, category => category.roomList)
