@@ -17,13 +17,29 @@ export class RoomService {
             },
             select:{
                 category:{
+                    id:true,
                     name:true
                 }
             }
         });
     }
     async getOneRoom(id:number):Promise<Room>{
-        return await this.roomRepository.findOneBy({id});
+        return await this.roomRepository.findOne({
+            where:{
+                id:id
+            },
+            
+                relations:{
+                    category:true,
+                },
+                select:{
+                    category:{
+                        id:true,
+                        name:true
+                    }
+                }
+            
+        });
     }
     async createRoom(data:RoomDto):Promise<Room>{
         const room=new Room();
@@ -34,7 +50,22 @@ export class RoomService {
     }
     async updateRoom(id:number, data:RoomDto):Promise<Room>{
         await this.roomRepository.update(id, data);
-        return this.roomRepository.findOneBy({id});
+        return this.roomRepository.findOne({
+            where:{
+                id:id
+            },
+            
+                relations:{
+                    category:true,
+                },
+                select:{
+                    category:{
+                        id:true,
+                        name:true
+                    }
+                }
+            
+        });
     }
     async deleteRoom(id:number):Promise<Object>{
         await this.roomRepository.delete(id);

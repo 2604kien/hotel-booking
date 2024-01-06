@@ -15,6 +15,8 @@ export class User{
     email:string;
     @Column()
     mobilePhone:string;
-    @OneToMany(()=>Booking, booking=>booking.user)
+    @OneToMany(()=>Booking, booking=>booking.user,{
+        cascade: true,
+    })
     bookingList:User[]
 }

@@ -10,12 +10,14 @@ export class Room {
     @Column()
     roomNumber: number;
 
-    @Column({nullable:true})
+    @Column()
     roomDetail: string;
 
     @ManyToOne(() => Category, category => category.roomList)
     category: Category;
 
-    @OneToMany(()=>Booking, booking=>booking.room)
+    @OneToMany(()=>Booking, booking=>booking.room,{
+        cascade: true,
+    })
     bookingList: Booking[]
 }

@@ -18,7 +18,7 @@ export class RoomController {
         return this.roomService.createRoom(data);
     }
     @Put(':id')
-    async updateRoom(@Param('id') id:number, data:RoomDto){
+    async updateRoom(@Param('id') id:number,@Body() data:RoomDto){
         return this.roomService.updateRoom(id, data);
     }
     @Delete(':id')
