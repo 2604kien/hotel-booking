@@ -1,0 +1,16 @@
+.home--page{
+    padding-top: 180px;
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 150px;
+}
+.grid--room{
+    display: grid;
+    width: 90%;
+    grid-template-columns: 17% 17% 17% 17% 17%;
+    gap:3%;
+    padding-left: 3%;
+}
