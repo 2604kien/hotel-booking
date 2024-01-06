@@ -34,6 +34,11 @@
     font-size: 1.2rem;
     cursor: pointer;
 }
+.add--category--form>select{
+    width: 400px;
+    font-size: 1.2rem;
+    padding: 5px;
+}
 input{
     text-indent: 5px;
 }
