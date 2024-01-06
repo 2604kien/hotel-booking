@@ -9,6 +9,8 @@ export class Category{
     name: string;
     @Column()
     description: string;
-    @OneToMany(()=>Room, room=>room.category)
+    @OneToMany(()=>Room, room=>room.category,{
+        cascade: true,
+    })
     roomList:Room[]
 }
