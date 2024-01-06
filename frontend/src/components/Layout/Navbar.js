@@ -6,9 +6,13 @@ import { getAllCategory } from "../../reducers/categoryReducer";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import logo from "../../images/hotel.png"
+import { filterRoom, getAllRoom } from "../../reducers/roomReducer";
 export default function Navbar(){
     const navigate=useNavigate();
     const {id}=useParams();
+    const roomItems=useSelector(state=>state.room.clone);
+    const [searchData,setSerchData]=React.useState("");
+    const filterData=roomItems && Array.isArray(roomItems)?roomItems.filter(room=>Object.values(room).filter(el=>JSON.stringify(el).toLowerCase().includes(searchData)||JSON.stringify(el).toUpperCase().includes(searchData)).length>0):[]
     const categoryItems=useSelector(state=>state.category.entities);
     const dispatch=useDispatch();
     const element=categoryItems && Array.isArray(categoryItems)?categoryItems.map(el=><li style={{
@@ -18,7 +22,15 @@ export default function Navbar(){
     React.useEffect(()=>{
         dispatch(getAllCategory());
     },[dispatch])
-
+    const handleChange=async (e)=>{
+        const {value}=e.target
+        setSerchData(value);
+        
+    }
+    React.useEffect(()=>{
+        navigate('/');
+        dispatch(filterRoom(filterData));
+    },[JSON.stringify(searchData)])
     return (
         <>
         <div className="nav--bar">
@@ -44,18 +56,20 @@ export default function Navbar(){
                         boxShadow:"0 0 5px rgba(0,0,0,0.5)",
                         borderRadius:"15px",
                         padding:"5px",
-                        outline:"none"
-                    }} type="text" placeholder="Search..."/>
-                    <button style={{
-                        fontSize:"1.2rem",
-                        backgroundColor:"white",
-                        border:"1px solid black",
-                        borderRadius:"15px",
-                        padding:"5px",
-                        cursor:"pointer"
-                    }}>Search</button>
+                        outline:"none",
+                        width:"400px"
+                    }} type="text" value={searchData} onChange={handleChange} placeholder="Search..."/>
                 </div>
-                <li>Profile</li>
+                <div style={{
+                    display:"flex",
+                    flexDirection:"row",
+                    alignItems:"center",
+                    justifyContent:"center",
+                    gap:"20px"
+                }}>
+                    <li>Login</li>
+                    <li onClick={()=>navigate('/register')}>Register</li>
+                </div>
             </ul>
             <ul className="bottom--nav">
                 {element}
