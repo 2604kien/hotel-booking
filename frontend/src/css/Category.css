@@ -1,0 +1,42 @@
+.add--category{
+    padding-top: 180px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.add--category--form{
+    width: fit-content;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    background-color: whitesmoke;
+    border-radius: 25px;
+    padding: 20px;
+    gap:20px;
+}
+.add--category--form>label{
+    font-size: 1.2rem;
+}
+.add--category--form >input{
+    width: 300px;
+    font-size: 1.2rem;
+}
+.add--category--form>textarea{
+    width: 700px;
+    height: 300px;
+    font-size: 1.2rem;
+    resize: none;
+}
+.add--category--form>div>button{
+    width: 200px;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+input{
+    text-indent: 5px;
+}
+textarea{
+    text-indent: 5px;
+}
