@@ -4,6 +4,7 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    padding-bottom: 100px;
 }
 
 .add--category--form{
@@ -44,4 +45,32 @@ input{
 }
 textarea{
     text-indent: 5px;
+}
+.table{
+    border-collapse: collapse;
+    margin: 20px 20vw;
+    width: 60vw;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0,0,0,0.25);
+}
+
+th{
+    padding: 20px;
+    font-size: 1.3rem;
+    cursor: default;
+    color: white;
+    background-color: rgb(78, 76, 76);
+}
+td{
+    padding: 20px;
+    font-size: 1.3rem;
+}
+tr{
+    border-bottom: 1px solid lightgrey;
+}
+.small--btn{
+    padding: 10px;
+    font-size: 1.2rem;
+    cursor: pointer;
 }

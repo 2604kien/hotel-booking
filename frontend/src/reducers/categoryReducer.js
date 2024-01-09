@@ -15,11 +15,20 @@ export const getOneCategory=createAsyncThunk('category/getOneCategory', async(id
     const response=await axios.get(server+`category/${id}`);
     return response.data;
 })
-export const createNewCategory=createAsyncThunk('category/createNewCategory',async(data)=>{
-    const response=await axios.post(server+'category', data);
+export const createNewCategory=createAsyncThunk('category/createNewCategory',async({data, token})=>{
+    const config={
+        headers: {Authorization: `Bearer ${token}`}
+    }
+    const response=await axios.post(server+'category', data, config);
     return response.data;
 })
-
+export const deleteCategory=createAsyncThunk('category/deleteCategory', async({id, token})=>{
+    const config={
+        headers: {Authorization: `Bearer ${token}`}
+    }
+    const response=await axios.delete(server+`category/${id}`, config)
+    return response.data;
+})
 const categorySlice=createSlice({
     name:'category',
     initialState: initialState,

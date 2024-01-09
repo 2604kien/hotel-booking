@@ -93,10 +93,10 @@ export default function Navbar(){
                     cursor:"pointer"  
                 }}>
                     {roles.includes("Admin")?<>
-                        <li >Category</li>                        
+                        <li onClick={()=>navigate('/category/all')}>Category</li>                        
                         <li >Room</li>
                         <li >Booking</li>
-                        <li >User</li>
+                        <li onClick={()=>navigate('/user')}>User</li>
                         <li onClick={handleLogout}>Logout</li>
                     </>:<li onClick={handleLogout}>Logout</li>}
                 </div>:<div style={{

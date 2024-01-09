@@ -4,7 +4,8 @@ import {useDispatch, useSelector} from "react-redux";
 import { createNewCategory } from "../../reducers/categoryReducer";
 
 export default function AddCategory(){
-    const message=useSelector(state=>state.category.message);
+
+    const token=useSelector(state=>state.auth.token);
     const dispatch=useDispatch();
     const [formData, setFormData]=React.useState({
         name:"",
@@ -21,7 +22,7 @@ export default function AddCategory(){
     }
     const handleSubmit=(e)=>{
         e.preventDefault();
-        dispatch(createNewCategory(formData)).then(()=>{
+        dispatch(createNewCategory({data:formData, token: token})).then(()=>{
             alert('Added new Category successfully');
             window.location.reload();
         })
