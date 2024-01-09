@@ -8,7 +8,7 @@ export default function Error404(){
             width: "100vw",
             height:"100vh"
         }}>
-            <h1>Sorry!...But the page you are looking for is not found.</h1>
+            <h1 style={{maxWidth:"60vw", textAlign:"center"}}>Sorry!...But the page you are looking for is not found, or you are unauthorized to access.</h1>
             <h2>Please try again!!!</h2>
         </div>
     )
