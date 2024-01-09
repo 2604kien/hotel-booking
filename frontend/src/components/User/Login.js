@@ -27,7 +27,7 @@ export default function Login(){
     }
     React.useEffect(()=>{
         dispatch(resetMessage());
-    },[])
+    },[dispatch])
     return (
         <div className="add--category">
             <h1>User Login:</h1>

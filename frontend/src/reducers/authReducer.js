@@ -46,6 +46,9 @@ const authSlice=createSlice({
             state.isAuthenticated=true;
             state.roles=(state.token && state.token.length>0)?JSON.parse(window.atob(state.token.split('.')[1])).UserInfo.roles:[""]
         })
+        .addCase(refresh.rejected, (state, action)=>{
+            console.log(JSON.stringify(action.error.message));
+        })
     }
 })
 export const {resetMessage}=authSlice.actions;
