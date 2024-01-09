@@ -11,7 +11,11 @@ export class CategoryService {
         private readonly categoryRepository:Repository<Category>
     ){}
     async findAllCategory():Promise<Category[]>{
-        return await this.categoryRepository.find();
+        return await this.categoryRepository.find({
+            relations:{
+                roomList:true
+            }
+        });
     }
     async createCategory(data: CategoryDto ):Promise<Category>{
         const category= new Category();
@@ -21,13 +25,27 @@ export class CategoryService {
     }
     async updateCategory(id:number, data:CategoryDto):Promise<Category>{
         await this.categoryRepository.update(id, data);
-        return await this.categoryRepository.findOneBy({id});
+        return await this.categoryRepository.findOne({
+            where:{
+                id:id
+            },
+            relations:{
+                roomList:true
+            }
+        });
     }
     async deleteCategory(id: number): Promise<Object>{
         await this.categoryRepository.delete(id);
         return {message:"Category deleted successfully"};
     }
     async getOneCategory(id:number):Promise<Category>{
-        return await this.categoryRepository.findOneBy({id});
+        return await this.categoryRepository.findOne({
+            where:{
+                id:id
+            },
+            relations:{
+                roomList:true
+            }
+        });
     }
 }

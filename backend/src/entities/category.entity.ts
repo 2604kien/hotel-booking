@@ -5,12 +5,13 @@ import { Room } from "./room.entity";
 export class Category{
     @PrimaryGeneratedColumn()
     id: number;
-    @Column()
+    @Column({unique:true})
     name: string;
     @Column()
     description: string;
     @OneToMany(()=>Room, room=>room.category,{
         cascade: true,
+        nullable:true,
     })
     roomList:Room[]
 }

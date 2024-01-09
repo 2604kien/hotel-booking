@@ -22,13 +22,16 @@ ul{
 .top--nav{
     border: 1px solid rgba(61, 60, 60, 0.3);
 }
-.top--nav>li{
+.top--nav>li>p{
     font-size: 1.5rem;
     cursor: pointer;
+    font-weight: 600;
+    color: black;
 }
 .top--nav>div>li{
     font-size: 1.5rem;
     cursor: pointer;
+    
 }
 .bottom--nav{
     border-bottom-color: white;

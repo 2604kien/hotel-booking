@@ -6,13 +6,15 @@ import { getAllCategory } from "../../reducers/categoryReducer";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import logo from "../../images/hotel.png"
-import { filterRoom, getAllRoom } from "../../reducers/roomReducer";
+import { filterRoom} from "../../reducers/roomReducer";
+import { logout, refresh } from "../../reducers/authReducer";
 export default function Navbar(){
     const navigate=useNavigate();
     const {id}=useParams();
+    const isAuthenticated=useSelector(state=>state.auth.isAuthenticated);
     const roomItems=useSelector(state=>state.room.clone);
     const [searchData,setSerchData]=React.useState("");
-    const filterData=roomItems && Array.isArray(roomItems)?roomItems.filter(room=>Object.values(room).filter(el=>JSON.stringify(el).toLowerCase().includes(searchData)||JSON.stringify(el).toUpperCase().includes(searchData)).length>0):[]
+    const filterData=roomItems && Array.isArray(roomItems)?roomItems.filter(room=>Object.values(room).filter(el=>JSON.stringify(el).toLowerCase().includes(searchData.toLowerCase())).length>0):[]
     const categoryItems=useSelector(state=>state.category.entities);
     const dispatch=useDispatch();
     const element=categoryItems && Array.isArray(categoryItems)?categoryItems.map(el=><li style={{
@@ -25,11 +27,18 @@ export default function Navbar(){
     const handleChange=async (e)=>{
         const {value}=e.target
         setSerchData(value);
-        
+    }
+    const handleLogout=async ()=>{
+        await dispatch(logout());
+        navigate('/login');
     }
     React.useEffect(()=>{
-        navigate('/');
-        dispatch(filterRoom(filterData));
+        dispatch(refresh());
+        if(searchData.length>0)
+        {
+            navigate('/');
+            dispatch(filterRoom(filterData));
+        }
     },[JSON.stringify(searchData)])
     return (
         <>
@@ -41,7 +50,7 @@ export default function Navbar(){
                     alignItems:"center",
                     justifyContent:"center",
                     gap:"10px"
-                }}><img src={logo} style={{width:"50px"}}/> ROYAL</li>
+                }}><img src={logo} style={{width:"50px"}}/> <p>ROYAL</p></li>
                 <div style={{
                     display:"flex",
                     flexDirection:"row",
@@ -60,15 +69,30 @@ export default function Navbar(){
                         width:"400px"
                     }} type="text" value={searchData} onChange={handleChange} placeholder="Search..."/>
                 </div>
-                <div style={{
+                <div >
+                    {isAuthenticated?<div style={{
                     display:"flex",
                     flexDirection:"row",
                     alignItems:"center",
                     justifyContent:"center",
-                    gap:"20px"
+                    gap:"20px",
+                    fontSize:"1.5rem",
+                    cursor:"pointer"  
                 }}>
-                    <li>Login</li>
-                    <li onClick={()=>navigate('/register')}>Register</li>
+                                            <li onClick={handleLogout}>Logout</li>
+                                    </div>:<div style={{
+                    display:"flex",
+                    flexDirection:"row",
+                    alignItems:"center",
+                    justifyContent:"center",
+                    gap:"20px",
+                    fontSize:"1.5rem",
+                    cursor:"pointer" 
+                }}>
+                                            <li onClick={()=>navigate('/login')}>Login</li>
+                                            <li onClick={()=>navigate('/register')}>Register</li>
+                                        </div>}
+                    
                 </div>
             </ul>
             <ul className="bottom--nav">

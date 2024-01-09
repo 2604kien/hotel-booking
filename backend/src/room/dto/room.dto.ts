@@ -10,4 +10,6 @@ export class RoomDto{
     roomDetail:string;
     @IsNotEmpty()
     category: Category;
+    @IsNotEmpty()
+    imageNames:string[];
 }

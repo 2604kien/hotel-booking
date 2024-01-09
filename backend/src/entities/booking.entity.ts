@@ -6,8 +6,14 @@ import { Room } from "./room.entity";
 export class Booking{
     @PrimaryGeneratedColumn()
     id:number;
-    @ManyToOne(()=>User, user=>user.bookingList)
+    @ManyToOne(()=>User, user=>user.bookingList, {
+        onDelete:'SET NULL',
+        onUpdate:'CASCADE'
+    })
     user:User;
-    @ManyToOne(()=>Room, room=>room.bookingList)
+    @ManyToOne(()=>Room, room=>room.bookingList, {
+        onDelete:'SET NULL',
+        onUpdate:'CASCADE'
+    })
     room:Room
 }

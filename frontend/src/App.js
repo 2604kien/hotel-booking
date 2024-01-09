@@ -6,6 +6,7 @@ import Category from "./components/Category/Category";
 import AddCategory from "./components/Category/AddCategory";
 import AddRoom from "./components/Room/AddRoom";
 import Register from "./components/User/Resiger";
+import Login from "./components/User/Login";
 function App() {
   return (
     <div className="App">
@@ -15,6 +16,7 @@ function App() {
             <Route path="category" element={<HomePage/>}/>
             <Route path="room" element={<HomePage/>}/>
             <Route path="register" element={<Register/>}/>
+            <Route path="login" element={<Login/>}/>
             <Route path="room/add" element={<AddRoom/>}/>
             <Route path="category/:id" element={<Category/>}/>
             <Route path="category/add" element={<AddCategory/>}/>
