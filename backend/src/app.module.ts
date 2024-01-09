@@ -3,7 +3,7 @@ import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { CategoryModule } from './category/category.module';
 import { RoomModule } from './room/room.module';
-import { UserModule } from './user/user.module';
+import { UserModule } from './user/user.module'
 import { BookingModule } from './booking/booking.module';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { AuthModule } from './auth/auth.module';

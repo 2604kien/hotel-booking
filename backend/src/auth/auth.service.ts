@@ -28,9 +28,14 @@ export class AuthService {
         if(!hashedPwd){
             throw new HttpException('Password does not match', HttpStatus.UNAUTHORIZED);
         }
-
-        const accessToken=await this.accessTokenService.signAsync({UserInfo:{username:user.username, roles:user.roles}});
-        const refreshToken=await this.refreshTokenService.signAsync({UserInfo:{username:user.username}}, {expiresIn:'7d'});
+    
+        const accessToken=await this.accessTokenService.signAsync({UserInfo:{username:user.username, roles:user.roles}},{
+            secret:`${process.env.JWT_TOKEN_SECRET}`
+        });
+        const refreshToken=await this.refreshTokenService.signAsync({UserInfo:{username:user.username}}, {
+            secret:`${process.env.JWT_TOKEN_SECRET}`,
+            expiresIn:'7d'
+        });
         await this.userRepository.update(user.id, {refreshToken: refreshToken});
         response.cookie('jwt',refreshToken,{
             httpOnly: true,
