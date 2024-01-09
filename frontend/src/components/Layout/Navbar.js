@@ -21,9 +21,21 @@ export default function Navbar(){
         backgroundColor:(Number(id)===el.id)?"rgba(224, 82, 82, 0.5)":"white",
         color:(Number(id)===el.id)?"white":"rgba(224, 82, 82, 0.5)"
     }} onClick={()=>navigate(`category/${el.id}`)} className="nav--category" key={el.id}>{el.name}</li>):(<></>)
+    const token=useSelector(state=>state.auth.token)
     React.useEffect(()=>{
         dispatch(getAllCategory());
-    },[dispatch])
+        const tokenExpirationThreshold = 3; 
+        let { exp } = token.length>0?JSON.parse(window.atob(token.split('.')[1])):"";
+        setInterval(()=>{
+                if (exp - Date.now() / 1000 < tokenExpirationThreshold) {
+                  // Dispatch the refreshAccessToken action
+                  
+                 dispatch(refresh());
+                 exp = {};
+                }
+            
+        }, 13*60*1000)
+    },[dispatch, token]);
     const handleChange=async (e)=>{
         const {value}=e.target
         setSerchData(value);
