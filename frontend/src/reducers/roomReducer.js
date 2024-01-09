@@ -9,9 +9,17 @@ export const getAllRoom=createAsyncThunk('room/getAllRoom', async()=>{
     const response=await axios.get(server+"room");
     return response.data;
 })
-export const createNewRoom=createAsyncThunk('room/createNewRoom', async(data)=>{
-    const response=await axios.post(server+'room', data);
-    return response.data;
+export const createNewRoom=createAsyncThunk('room/createNewRoom', async({data, files})=>{
+    const formData = new FormData();
+        
+    files.forEach((file) => {
+        formData.append('files', file);
+    });
+    Object.keys(data).forEach((key) => {
+        formData.append(key, data[key]);
+    });
+    const response2=await axios.post(server+'room/upload', formData);
+    return response2.data;
 })
 const roomSlice=createSlice({
     name:'room',

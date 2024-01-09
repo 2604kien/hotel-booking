@@ -1,4 +1,4 @@
-import { Body, Injectable } from '@nestjs/common';
+import { Body, HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Room } from 'src/entities/room.entity';
 import { Repository } from 'typeorm';
@@ -18,7 +18,8 @@ export class RoomService {
             select:{
                 category:{
                     id:true,
-                    name:true
+                    name:true,
+                    description:true
                 }
             }
         });
@@ -35,18 +36,25 @@ export class RoomService {
                 select:{
                     category:{
                         id:true,
-                        name:true
+                        name:true,
+                        description:true
                     }
                 }
             
         });
     }
-    async createRoom(data:RoomDto):Promise<Room>{
-        const room=new Room();
-        room.roomNumber=data.roomNumber;
-        room.roomDetail=data.roomDetail;
-        room.category=data.category;
-        return await this.roomRepository.save(room);
+    async createRoom(data:RoomDto){
+        try{
+            const room=new Room();
+            room.roomNumber=data.roomNumber;
+            room.roomDetail=data.roomDetail;
+            room.category=data.category;
+            room.imageNames=data.imageNames;
+            return this.roomRepository.save(room);
+        }
+        catch(err){
+            throw new HttpException('The same room number is created', HttpStatus.CONFLICT);
+        }
     }
     async updateRoom(id:number, data:RoomDto):Promise<Room>{
         await this.roomRepository.update(id, data);
@@ -61,7 +69,8 @@ export class RoomService {
                 select:{
                     category:{
                         id:true,
-                        name:true
+                        name:true,
+                        description:true
                     }
                 }
             

@@ -7,7 +7,7 @@ export class User{
     id:number;
     @Column()
     fullName:string;
-    @Column()
+    @Column({unique:true})
     username: string;
     @Column()
     password: string;
@@ -15,8 +15,13 @@ export class User{
     email:string;
     @Column()
     mobilePhone:string;
+    @Column({nullable:true})
+    refreshToken:string;
+    @Column("text", {nullable:true, default:['Member'], array:true})
+    roles:string[]
     @OneToMany(()=>Booking, booking=>booking.user,{
         cascade: true,
+        nullable:true
     })
     bookingList:User[]
 }

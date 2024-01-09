@@ -5,6 +5,9 @@ import { CategoryModule } from './category/category.module';
 import { RoomModule } from './room/room.module';
 import { UserModule } from './user/user.module';
 import { BookingModule } from './booking/booking.module';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { AuthModule } from './auth/auth.module';
+import * as path from "path";
 
 @Module({
   imports: [
@@ -19,10 +22,14 @@ import { BookingModule } from './booking/booking.module';
       synchronize: true,
     }),
     ConfigModule.forRoot({isGlobal:true,}),
+    ServeStaticModule.forRoot({
+      rootPath: path.join(__dirname, '..', 'public'),
+    }),
     CategoryModule,
     UserModule,
     BookingModule,
-    RoomModule
+    RoomModule,
+    AuthModule
   ]
 })
 export class AppModule {}

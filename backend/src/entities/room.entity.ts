@@ -7,17 +7,23 @@ export class Room {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column()
+    @Column({unique:true})
     roomNumber: number;
 
     @Column()
     roomDetail: string;
+    @Column("text", {array:true, nullable:true})
+    imageNames:string[];
 
-    @ManyToOne(() => Category, category => category.roomList)
+    @ManyToOne(() => Category, category => category.roomList, {
+        onDelete:'SET NULL',
+        onUpdate:'CASCADE',
+    })
     category: Category;
 
     @OneToMany(()=>Booking, booking=>booking.room,{
         cascade: true,
+        nullable:true,
     })
     bookingList: Booking[]
 }

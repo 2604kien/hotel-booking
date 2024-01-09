@@ -1,16 +1,15 @@
 import React from "react";
 import "../../css/Register.css"
 import { useDispatch, useSelector } from "react-redux";
-import { createUser, resetMessage } from "../../reducers/userReducer";
-export default function Register(){
+import { useNavigate } from "react-router-dom";
+import { login, resetMessage } from "../../reducers/authReducer";
+export default function Login(){
     const dispatch=useDispatch();
+    const navigate=useNavigate();
     const serverMessage=useSelector(state=>state.user.serverMessage);
     const [formData, setFormData]=React.useState({
-        fullName:"",
         username:"",
-        password:"",
-        email:"",
-        mobilePhone:""
+        password:""
     })
     const handleChange=(e)=>{
         const {name, value}=e.target;
@@ -21,28 +20,23 @@ export default function Register(){
             }
         })
     }
-    const handleSubmit=(e)=>{
+    const handleSubmit=async (e)=>{
         e.preventDefault();
-        dispatch(createUser(formData));
+        await dispatch(login(formData));
+        navigate('/');
     }
     React.useEffect(()=>{
         dispatch(resetMessage());
     },[])
     return (
         <div className="add--category">
-            <h1>Register New User</h1>
+            <h1>User Login:</h1>
             <form className="add--category--form" onSubmit={handleSubmit}>
                 {serverMessage && serverMessage.length>0 && <h3 style={{color:"black"}}>{serverMessage}</h3>}
-                <label htmlFor="full--name">Full Name:</label>
-                <input value={formData.fullName} onChange={handleChange} name='fullName' type="text" placeholder="Please enter your name..." id="full--name" required/>
                 <label htmlFor="user--name">Username:</label>
                 <input value={formData.username}  onChange={handleChange}  name='username' type="text" placeholder="Please enter your username..." id="user--name" required/>
                 <label htmlFor="password">Password:</label>
                 <input value={formData.password} onChange={handleChange} name="password" type="password" placeholder="Please enter your password..." id="password" required/>
-                <label htmlFor="email">Email:</label>
-                <input value={formData.email} onChange={handleChange} name='email' type="email" placeholder="Please enter your email..." id="email" required/>
-                <label htmlFor="mobilePhone">Mobile Phone:</label>
-                <input value={formData.mobilePhone} onChange={handleChange} name='mobilePhone' type="text" placeholder="Please enter your mobile number..." id="mobilePhone" required/>
                 
                 <div style={{
                     width:"100%",
