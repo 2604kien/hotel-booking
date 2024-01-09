@@ -51,7 +51,9 @@ export class AuthService {
             throw new HttpException('Unauthorised', HttpStatus.UNAUTHORIZED);
         }
         try{
-            const payload = await this.refreshTokenService.verify(cookie.jwt)
+            const payload = await this.refreshTokenService.verify(cookie.jwt,{
+                secret:`${process.env.JWT_TOKEN_SECRET}`
+            });
             const foundedUser=await this.userRepository.findOne({
                 where:{
                     username:payload.UserInfo.username
@@ -60,7 +62,9 @@ export class AuthService {
             if(!foundedUser){
                 throw new UnauthorizedException('No user found');
             }
-            const accessToken=await this.accessTokenService.signAsync({UserInfo:{username:foundedUser.username, roles:foundedUser.roles}});
+            const accessToken=await this.accessTokenService.signAsync({UserInfo:{username:foundedUser.username, roles:foundedUser.roles}},{
+                secret:`${process.env.JWT_TOKEN_SECRET}`
+            });
             return {accessToken:accessToken};
 
         } 
