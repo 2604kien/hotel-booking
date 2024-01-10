@@ -1,15 +1,16 @@
 import React from "react";
-import { useSelector} from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import CategoryCard from "./CategoryCard";
-import Error404 from "../Error404";
+import RoomTableCard from "./RoomTableCard";
 import { admin } from "../../config/role";
-
-export default function ViewAllCategory(){
+import Error404 from "../Error404";
+import { getAllRoom } from "../../reducers/roomReducer";
+export default function AllRoom(){
     const roles=useSelector(state=>state.auth.roles);
     const navigate=useNavigate();
-    const categoryData=useSelector(state=> state.category.entities);
-    const element=categoryData&& categoryData.length>0?categoryData.map(el=> <CategoryCard key={el.id} data={el}/>):<></>
+    const dispatch=useDispatch();
+    const roomData=useSelector(state=> state.room.clone);
+    const element=roomData&& roomData.length>0?roomData.map(el=> <RoomTableCard key={el.id} data={el}/>):<></>
     const data= roles.includes(admin)?(<div className="add--category">
                     
                     <div style={{
@@ -18,14 +19,16 @@ export default function ViewAllCategory(){
                         justifyContent:"flex-end",
                         marginTop:"50px",
                     }}>
-                        <button onClick={()=>navigate('/category/add')} className="small--btn">Add New Category</button>
+                        <button onClick={()=>navigate('/room/add')} className="small--btn">Add New Room</button>
                     </div>
-                    <h1>All Category</h1>
+                    <h1>All Room</h1>
                         <table>
                             <thead>
                                 <tr>
-                                    <th>Category Name</th>
-                                    <th>Category Description</th>
+                                    <th>Room Number</th>
+                                    <th>Room Detail</th>
+                                    <th>Room Photo Name</th>
+                                    <th>Room Category</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -34,5 +37,8 @@ export default function ViewAllCategory(){
                             </tbody>
                         </table>
                 </div>):<Error404/>
-    return data
+    React.useEffect(()=>{
+        dispatch(getAllRoom());
+    },[dispatch]);
+    return data;
 }

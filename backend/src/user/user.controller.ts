@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post, Put, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post, Put, UseGuards } from '@nestjs/common';
 import { UserService } from './user.service';
 import { UserDto } from './dto/user.dto';
 import { AuthGuard } from '@nestjs/passport';
@@ -28,7 +28,7 @@ export class UserController {
     }
     @Role(Roles.Admin)
     @UseGuards(JwtAuthGuard, RolesGuard)
-    @Put(':id')
+    @Patch(':id')
     async updateUser(@Param('id') id:number, @Body() data:UserDto){
         return this.userService.updateUserById(id, data);
     }
@@ -36,6 +36,7 @@ export class UserController {
     @UseGuards(JwtAuthGuard, RolesGuard)
     @Delete(':id')
     async deleteUser(@Param('id') id: number){
+        console.log(id);
         return this.userService.deleteUserById(id);
     }
 }
