@@ -2,7 +2,8 @@ import React from "react";
 import "../../css/Register.css"
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { login, resetMessage } from "../../reducers/authReducer";
+import { login } from "../../reducers/authReducer";
+import { resetMessage } from "../../reducers/userReducer";
 export default function Login(){
     const dispatch=useDispatch();
     const navigate=useNavigate();

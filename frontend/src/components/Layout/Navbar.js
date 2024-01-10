@@ -8,6 +8,7 @@ import { useParams } from "react-router-dom";
 import logo from "../../images/hotel.png"
 import { filterRoom} from "../../reducers/roomReducer";
 import { logout, refresh, resetMessage } from "../../reducers/authReducer";
+import {admin} from "../../config/role"
 export default function Navbar(){
     const navigate=useNavigate();
     const {id}=useParams();
@@ -92,9 +93,9 @@ export default function Navbar(){
                     fontSize:"1.5rem",
                     cursor:"pointer"  
                 }}>
-                    {roles.includes("Admin")?<>
-                        <li onClick={()=>navigate('/category/all')}>Category</li>                        
-                        <li >Room</li>
+                    {roles.includes(admin)?<>
+                        <li onClick={()=>navigate('/category')}>Category</li>                        
+                        <li onClick={()=>navigate('/room')}>Room</li>
                         <li >Booking</li>
                         <li onClick={()=>navigate('/user')}>User</li>
                         <li onClick={handleLogout}>Logout</li>

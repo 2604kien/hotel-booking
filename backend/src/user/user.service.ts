@@ -2,7 +2,7 @@ import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from 'src/entities/user.entity';
 import { Repository } from 'typeorm';
-import { UserDto } from './dto/user.dto';
+import { UserDto, UserPutDto } from './dto/user.dto';
 import * as bcrypt from "bcrypt"
 
 @Injectable()
@@ -15,7 +15,9 @@ export class UserService {
         return await this.userRepository.find();
     }
     async getOneUser(id:number):Promise<User>{
-        return await this.userRepository.findOneBy({id})
+        const user=await this.userRepository.findOneBy({id})
+        delete user.password;
+        return user;
     }
     async createNewUser(data:UserDto){
         try{
@@ -31,7 +33,7 @@ export class UserService {
             throw new HttpException('The same user with that username is created', HttpStatus.CONFLICT);
         }
     }
-    async updateUserById(id:number, data:UserDto){
+    async updateUserById(id:number, data:UserPutDto){
         await this.userRepository.update(id, data);
         return this.userRepository.findOneBy({id});
     }

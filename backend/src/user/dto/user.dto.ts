@@ -17,3 +17,20 @@ export class UserDto{
     @IsNotEmpty()
     mobilePhone:string;
 }
+export class UserPutDto{
+    @IsString()
+    @IsNotEmpty()
+    fullName:string;
+    @IsString()
+    @IsNotEmpty()
+    username:string;
+    @IsString()
+    @IsNotEmpty()
+    password:string;
+    @IsString()
+    @IsNotEmpty()
+    email:string;
+    @IsString()
+    @IsNotEmpty()
+    mobilePhone:string;
+}

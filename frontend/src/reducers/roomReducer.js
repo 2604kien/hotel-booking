@@ -21,6 +21,15 @@ export const createNewRoom=createAsyncThunk('room/createNewRoom', async({data, f
     const response2=await axios.post(server+'room/upload', formData);
     return response2.data;
 })
+export const deleteRoom=createAsyncThunk('room/deleteRoom', async({id, token})=>{
+    const config={
+        headers:{
+            authorization:`Bearer ${token}`
+        }
+    }
+    const response=await axios.delete(server+`room/${id}`, config);
+    return response.data;
+})
 const roomSlice=createSlice({
     name:'room',
     initialState,

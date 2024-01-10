@@ -17,7 +17,7 @@ export class User{
     mobilePhone:string;
     @Column({nullable:true})
     refreshToken:string;
-    @Column("text", {nullable:true, default:['Member'], array:true})
+    @Column("text", {nullable:true, default:['member'], array:true})
     roles:string[]
     @OneToMany(()=>Booking, booking=>booking.user,{
         cascade: true,
