@@ -10,6 +10,7 @@ export default function CategoryCard(props){
     }
     return (
         <tr>
+            <td>{props.data.id}</td>
             <td>{props.data.name}</td>
             <td>{props.data.description}</td>
             <td><div>

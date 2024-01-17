@@ -6,6 +6,7 @@ import { createNewRoom } from "../../reducers/roomReducer";
 export default function AddRoom(){
     const allCategory=useSelector(state=>state.category.entities);
     const dispatch=useDispatch();
+    const token=useSelector(state=>state.auth.token);
     const element= allCategory &&Array.isArray(allCategory)?allCategory.map(category=><option key={category.id} value={category.id}>{category.name}</option>):(<></>);
     const [currFile, setCurrFile]=React.useState(null);
     const [fileArray, setFileArray]=React.useState([]);
@@ -34,7 +35,7 @@ export default function AddRoom(){
         roomNumber:"",
         roomDetail:"",
         category:{
-            id:""
+            id:0
         },
         imageNames:[]
     })
@@ -60,9 +61,7 @@ export default function AddRoom(){
     const handleSubmit=(e)=>{
         e.preventDefault();
         
-        dispatch(createNewRoom({data: formData, files:fileArray})).then(()=>{
-
-        })
+        dispatch(createNewRoom({data: formData, files:fileArray, token:token}))
         
     }
     const handleFile=(e)=>{
@@ -90,6 +89,7 @@ export default function AddRoom(){
                 <input onChange={handleChange} id="room--number" name="roomNumber" value={formData.roomNumber} type="number" placeholder="Enter room number..." required/>
                 <label htmlFor="select--category">Category:</label>
                 <select id="select--category" onChange={handleChange} value={formData.category.id} name="id" >
+                    <option>--Select--</option>
                     {element}
                 </select>
                 <label htmlFor="file--upload">Upload Images:</label>
