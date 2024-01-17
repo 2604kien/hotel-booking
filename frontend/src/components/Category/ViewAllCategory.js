@@ -24,6 +24,7 @@ export default function ViewAllCategory(){
                         <table>
                             <thead>
                                 <tr>
+                                    <th>Category Id</th>
                                     <th>Category Name</th>
                                     <th>Category Description</th>
                                     <th>Action</th>

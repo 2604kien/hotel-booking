@@ -9,16 +9,28 @@ export const getAllRoom=createAsyncThunk('room/getAllRoom', async()=>{
     const response=await axios.get(server+"room");
     return response.data;
 })
-export const createNewRoom=createAsyncThunk('room/createNewRoom', async({data, files})=>{
+export const getRoomById=createAsyncThunk('room/getRoomById', async ({id, token})=>{
+    const config={
+        headers:{
+            authorization:`Bearer ${token}`
+        }
+    }
+    const response=await axios.get(server+`room/${id}`, config);
+    return response.data;
+})
+export const createNewRoom=createAsyncThunk('room/createNewRoom', async({data, files, token})=>{
     const formData = new FormData();
-        
+    const config={
+        headers:{
+            authorization: `Bearer ${token}`
+        }
+    }
     files.forEach((file) => {
         formData.append('files', file);
     });
-    Object.keys(data).forEach((key) => {
-        formData.append(key, data[key]);
-    });
-    const response2=await axios.post(server+'room/upload', formData);
+    console.log(data)
+    const response=await axios.post(server+'room', data, config);
+    const response2=await axios.post(server+'room/upload', formData, config);
     return response2.data;
 })
 export const deleteRoom=createAsyncThunk('room/deleteRoom', async({id, token})=>{

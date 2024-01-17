@@ -11,6 +11,7 @@ import AllUser from "./components/User/AllUser"
 import ViewAllCategory from "./components/Category/ViewAllCategory";
 import EditUser from "./components/User/EditUser";
 import AllRoom from "./components/Room/AllRoom";
+import ViewRoom from "./components/Room/ViewRoom";
 function App() {
   return (
     <div className="App">
@@ -20,6 +21,7 @@ function App() {
             <Route path="register" element={<Register/>}/>
             <Route path="login" element={<Login/>}/>
             <Route path="room" element={<AllRoom/>}/>
+            <Route path="room/view/:id" element={<ViewRoom/>}/>
             <Route path="room/add" element={<AddRoom/>}/>
             <Route path="user" element={<AllUser/>}/>
             <Route path ="user/edit/:id" element={<EditUser/>}/>
