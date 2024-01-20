@@ -33,6 +33,7 @@ export default function AddRoom(){
     </div>)
     const [formData, setFormData]=React.useState({
         roomNumber:"",
+        price:"",
         roomDetail:"",
         category:{
             id:0
@@ -87,6 +88,8 @@ export default function AddRoom(){
             <form className="add--category--form" onSubmit={handleSubmit}>
                 <label htmlFor="room--number">Room Number:</label>
                 <input onChange={handleChange} id="room--number" name="roomNumber" value={formData.roomNumber} type="number" placeholder="Enter room number..." required/>
+                <label htmlFor="room--number">Room Price/night:</label>
+                <input onChange={handleChange} id="room--number" name="price" value={formData.price} type="number" placeholder="Enter room price..." required/>
                 <label htmlFor="select--category">Category:</label>
                 <select id="select--category" onChange={handleChange} value={formData.category.id} name="id" >
                     <option>--Select--</option>

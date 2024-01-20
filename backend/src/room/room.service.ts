@@ -49,6 +49,7 @@ export class RoomService {
             room.roomNumber=data.roomNumber;
             room.roomDetail=data.roomDetail;
             room.category=data.category;
+            room.price=data.price;
             room.imageNames=data.imageNames;
             return this.roomRepository.save(room);
         }

@@ -14,13 +14,16 @@ export class Room {
     roomDetail: string;
     @Column("text", {array:true, nullable:true})
     imageNames:string[];
-
+    @Column({nullable:true})
+    price:number;
+    @Column('boolean', {default:'true'})
+    isDisplay: boolean;
     @ManyToOne(() => Category, category => category.roomList, {
         onDelete:'SET NULL',
         onUpdate:'CASCADE',
     })
     category: Category;
-
+    
     @OneToMany(()=>Booking, booking=>booking.room,{
         cascade: true,
         nullable:true,
