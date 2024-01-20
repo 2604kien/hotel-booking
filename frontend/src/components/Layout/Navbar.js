@@ -9,6 +9,7 @@ import logo from "../../images/hotel.png"
 import { filterRoom} from "../../reducers/roomReducer";
 import { logout, refresh, resetMessage } from "../../reducers/authReducer";
 import {admin} from "../../config/role"
+import { getUserById } from "../../reducers/userReducer";
 export default function Navbar(){
     const navigate=useNavigate();
     const {id}=useParams();
@@ -24,10 +25,13 @@ export default function Navbar(){
         color:(Number(id)===el.id)?"white":"rgba(224, 82, 82, 0.5)"
     }} onClick={()=>navigate(`category/${el.id}`)} className="nav--category" key={el.id}>{el.name}</li>):(<></>)
     const token=useSelector(state=>state.auth.token)
+    const userId=token.length>0?JSON.parse(window.atob(token.split('.')[1])).UserInfo.id:"";
+    console.log(userId)
     React.useEffect(()=>{
         dispatch(getAllCategory());
         const tokenExpirationThreshold = 3; 
         let { exp } = token.length>0?JSON.parse(window.atob(token.split('.')[1])):"";
+      
         setInterval(()=>{
                 if (exp - Date.now() / 1000 < tokenExpirationThreshold) {
                   // Dispatch the refreshAccessToken action
@@ -48,6 +52,7 @@ export default function Navbar(){
     }
     React.useEffect(()=>{
         dispatch(refresh());
+        dispatch(getUserById());
         if(searchData.length>0)
         {
             navigate('/');
