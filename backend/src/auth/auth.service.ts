@@ -29,10 +29,10 @@ export class AuthService {
             throw new HttpException('Password does not match', HttpStatus.UNAUTHORIZED);
         }
     
-        const accessToken=await this.accessTokenService.signAsync({UserInfo:{username:user.username, roles:user.roles}},{
+        const accessToken=await this.accessTokenService.signAsync({UserInfo:{username:user.username, roles:user.roles, id: user.id}},{
             secret:`${process.env.JWT_TOKEN_SECRET}`
         });
-        const refreshToken=await this.refreshTokenService.signAsync({UserInfo:{username:user.username}}, {
+        const refreshToken=await this.refreshTokenService.signAsync({UserInfo:{username:user.username, id:user.id}}, {
             secret:`${process.env.JWT_TOKEN_SECRET}`,
             expiresIn:'7d'
         });
