@@ -3,7 +3,9 @@ import axios from "axios";
 import { server } from "../config/serverURL";
 
 const roomAdapter=createEntityAdapter();
-const initialState=roomAdapter.getInitialState({});
+const initialState=roomAdapter.getInitialState({
+    currRoom:""
+});
 
 export const getAllRoom=createAsyncThunk('room/getAllRoom', async()=>{
     const response=await axios.get(server+"room");
@@ -31,7 +33,7 @@ export const createNewRoom=createAsyncThunk('room/createNewRoom', async({data, f
     console.log(data)
     const response=await axios.post(server+'room', data, config);
     const response2=await axios.post(server+'room/upload', formData, config);
-    return response2.data;
+    return response.data;
 })
 export const deleteRoom=createAsyncThunk('room/deleteRoom', async({id, token})=>{
     const config={
@@ -54,6 +56,9 @@ const roomSlice=createSlice({
         builder.addCase(getAllRoom.fulfilled, (state, action)=>{
             state.entities=action.payload;
             state.clone=action.payload;
+        })
+        .addCase(getRoomById.fulfilled, (state, action)=>{
+            state.currRoom=action.payload;
         })
     }
 })

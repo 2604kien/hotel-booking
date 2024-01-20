@@ -12,4 +12,6 @@ export class RoomDto{
     category: Category;
     @IsNotEmpty()
     imageNames:string[];
+    @IsNotEmpty()
+    price:number;
 }
