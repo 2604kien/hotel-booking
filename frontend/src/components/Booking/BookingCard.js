@@ -2,6 +2,7 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import moment from "moment";
+import { addBooking } from "../../reducers/bookingReducer";
 export default function BookingCard(props){
     const dispatch=useDispatch();
     const token=useSelector(state=>state.auth.token);
@@ -10,14 +11,23 @@ export default function BookingCard(props){
     const [formData, setFormData]=React.useState({
         checkIn:"",
         checkOut:"",
-        userId:"",
-        roomId:Number(roomId)
+        price:"",
+        user:{
+            id:""
+        },
+        room:{
+            id:Number(roomId)
+        }
     })
+    const days=Math.ceil((moment.utc(formData.checkOut).unix()-moment.utc(formData.checkIn).unix())/ ( 60 * 60 * 24))===0?1:Math.ceil((moment.utc(formData.checkOut).unix()-moment.utc(formData.checkIn).unix())/ ( 60 * 60 * 24));
+    const element=days>=1?"Total: $"+days*props.price+" AUD":"Please enter valid check-in, check-out date.";
     React.useEffect(()=>{
         if(token) setFormData(prev=>{
             return{
                 ...prev,
-                userId:userId
+                user:{
+                    id:userId
+                }
             }
         })
     },[token])
@@ -31,11 +41,11 @@ export default function BookingCard(props){
             }
         })
     }
-    const days=Math.ceil((moment.utc(formData.checkOut).unix()-moment.utc(formData.checkIn).unix())/ ( 60 * 60 * 24));
-    const element=days>=1?"Total: $"+days*props.price+" AUD":"Please enter valid check-in, check-out date.";
-    const handleSubmit=()=>{
+   console.log(days*props.price);
+    const handleSubmit=async ()=>{
         if(days&&formData.checkIn&&formData.checkOut){
-            dispatch()
+            await dispatch(addBooking({data:formData, token:token, price: days*props.price}));
+            alert('Your booking is succeeded.');
         }
         else{
             alert('Please enter valid check-in, check-out date.');
@@ -54,7 +64,7 @@ export default function BookingCard(props){
                     <input onChange={handleChange} value={formData.checkOut} min={formData.checkIn} type="date" id="checkOut" name="checkOut"/>
                 </div>
             </form>
-            <div className="displayFlexCenter" style={{alignItems:"center"}}>
+            <div className="displayFlexCenter" style={{alignItems:"center", margin:"10px"}}>
                 <button onClick={handleSubmit} style={{width:"150px"}}>Reserve</button>
                 {days>0&&<h3 style={{textDecoration:"underline"}}>Price: <span style={{fontWeight:"400"}}>${props.price} AUD/day x {days} day(s)</span></h3>}
             </div>
