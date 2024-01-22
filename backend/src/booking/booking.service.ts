@@ -52,6 +52,9 @@ export class BookingService {
         const booking=new Booking();
         booking.user=data.user;
         booking.room=data.room;
+        booking.checkIn=data.checkIn;
+        booking.checkOut=data.checkOut;
+        booking.price=data.price;
         return this.bookingRepository.save(booking);
     }
     async updateOneBooking(id:number, data:BookingDto):Promise<Booking>{

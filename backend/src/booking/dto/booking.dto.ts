@@ -7,4 +7,10 @@ export class BookingDto{
     user:User;
     @IsNotEmpty()
     room:Room;
+    @IsNotEmpty()
+    checkIn:Date;
+    @IsNotEmpty()
+    checkOut:Date;
+    @IsNotEmpty()
+    price:number;
 }

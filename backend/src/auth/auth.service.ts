@@ -62,7 +62,7 @@ export class AuthService {
             if(!foundedUser){
                 throw new UnauthorizedException('No user found');
             }
-            const accessToken=await this.accessTokenService.signAsync({UserInfo:{username:foundedUser.username, roles:foundedUser.roles}},{
+            const accessToken=await this.accessTokenService.signAsync({UserInfo:{username:foundedUser.username, roles:foundedUser.roles, id:foundedUser.id}},{
                 secret:`${process.env.JWT_TOKEN_SECRET}`
             });
             return {accessToken:accessToken};
