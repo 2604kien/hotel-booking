@@ -25,8 +25,6 @@ export default function Navbar(){
         color:(Number(id)===el.id)?"white":"rgba(224, 82, 82, 0.5)"
     }} onClick={()=>navigate(`category/${el.id}`)} className="nav--category" key={el.id}>{el.name}</li>):(<></>)
     const token=useSelector(state=>state.auth.token)
-    const userId=token.length>0?JSON.parse(window.atob(token.split('.')[1])).UserInfo.id:"";
-    console.log(userId)
     React.useEffect(()=>{
         dispatch(getAllCategory());
         const tokenExpirationThreshold = 3; 

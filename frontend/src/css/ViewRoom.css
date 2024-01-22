@@ -29,7 +29,6 @@
     width: 100%;
     height: 100%;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
 }
 .image--grid{
@@ -41,13 +40,17 @@
 .displayFlexCenter{
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    border: 1px solid black;
     width: 100%;
 }
 .booking--card{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     border: 1px solid black;
     width: 100%;
     height:100%;
+    gap: 20px;
+    padding: 0 20px;
+    border-radius: 15px;
+    padding-bottom: 50px;
 }

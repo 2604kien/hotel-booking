@@ -17,11 +17,11 @@ export default function RoomCard(props){
     console.log(props.data.imageNames)
     const element=props.data.isDisplay?(
         <div className="roomCard" >
-            <div className="arrow">
+            {props.data.imageNames.length>1&&<div className="arrow">
                 <img onClick={handleDecre} src={arrow} style={{transform:"scale(-1)", position:"absolute", left:"10px"}} />
                 <img onClick={handleIncr} src={arrow} style={{position:"absolute", right:"30px"}}/>
 
-            </div>
+            </div>}
             <div onClick={()=>navigate(`/room/view/${props.data.id}`)}>
             <img style={{width:"100%", overflow:"hidden", borderRadius:"15px", transition:"all 0.5s ease"}} src={server+`images/room/${props.data.imageNames[currIMG]}`}/>
             <h4>Room Number: <span style={{fontWeight:"400"}}>{props.data.roomNumber}</span></h4>

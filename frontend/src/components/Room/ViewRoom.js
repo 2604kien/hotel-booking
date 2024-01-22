@@ -28,11 +28,11 @@ export default function ViewRoom(){
                     </div>                  
             </div>
             <div className="detail--payment">
-                    <div className="displayFlexCenter" style={{alignItems:"flex-start"}}>
+                    <div className="displayFlexCenter" style={{alignItems:"flex-start", height:"100%"}}>
                         <h2>{roomData?(roomData.roomNumber + " - "+roomData.category.name):""}</h2>
                         <p>{roomData.roomDetail}</p>
                     </div>
-                    <BookingCard/>
+                    <BookingCard price={roomData.price}/>
             </div>
         </div>
     )
