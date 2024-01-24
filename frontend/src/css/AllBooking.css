@@ -1,4 +1,4 @@
-.all--booking{
+.all--booking, .view--booking{
     padding-top: 250px;
     display: flex;
     flex-direction: column;
@@ -7,4 +7,20 @@
 }
 .all--booking>table{
     width: 80%;
+}
+.view--booking--grid{
+    width: 60%;
+    display: grid;
+    grid-template-columns: 30% 70%;
+    border: 1px solid black;
+}
+.view--booking--grid>h3{
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center ;
+    align-items: center;
+    width: 100%;
+    height: 50px;
+    border-right: 1px solid black;
 }

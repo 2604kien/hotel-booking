@@ -3,7 +3,9 @@ import axios from "axios";
 import { server } from "../config/serverURL";
 
 const bookingAdapter=createEntityAdapter();
-const initialState=bookingAdapter.getInitialState();
+const initialState=bookingAdapter.getInitialState({
+    currBooking:""
+});
 
 export const getAllBooking=createAsyncThunk('booking/getAllBooking', async(token)=>{
     const config={
@@ -14,7 +16,15 @@ export const getAllBooking=createAsyncThunk('booking/getAllBooking', async(token
     const response=await axios.get(server+"booking", config);
     return response.data;
 })
-
+export const getBookingById=createAsyncThunk('booking/getBookingById', async({id,token})=>{
+    const config={
+        headers:{
+            authorization: `Bearer ${token}`
+        }
+    }
+    const response=await axios.get(server+`booking/${id}`, config);
+    return response.data;
+})
 export const addBooking=createAsyncThunk('booking/addBooking', async({data, token, price})=>{
     const config={
         headers:{
@@ -41,6 +51,9 @@ const bookingSlice=createSlice({
     extraReducers: builder=>{
         builder.addCase(getAllBooking.fulfilled, (state, action)=>{
             state.entities=action.payload;
+        })
+        .addCase(getBookingById.fulfilled, (state, action)=>{
+            state.currBooking=action.payload;
         })
     }
 })
