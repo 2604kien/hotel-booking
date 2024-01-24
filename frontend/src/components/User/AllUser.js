@@ -31,7 +31,7 @@ export default function User(){
             </div>):<Error404/>
     React.useEffect(()=>{
         dispatch(getAllUser(token))
-    },[JSON.stringify(token)])
+    },[token, dispatch])
     return (
         <div>
             {data}

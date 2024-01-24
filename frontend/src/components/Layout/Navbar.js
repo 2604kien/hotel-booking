@@ -99,7 +99,7 @@ export default function Navbar(){
                     {roles.includes(admin)?<>
                         <li onClick={()=>navigate('/category')}>Category</li>                        
                         <li onClick={()=>navigate('/room')}>Room</li>
-                        <li >Booking</li>
+                        <li onClick={()=>navigate('booking/all')}>Booking</li>
                         <li onClick={()=>navigate('/user')}>User</li>
                         <li onClick={handleLogout}>Logout</li>
                     </>:<li onClick={handleLogout}>Logout</li>}
