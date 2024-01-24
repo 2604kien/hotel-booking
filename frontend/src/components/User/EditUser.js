@@ -40,7 +40,7 @@ export default function EditUser(){
         dispatch(getUserById({id, token})).then(()=>{
             setFormData(userData);
         })
-    },[dispatch, JSON.stringify(userData), JSON.stringify(token)])
+    },[dispatch, JSON.stringify(userData), token])
     return(
         <div className="add--category">
         <h1>User Login:</h1>

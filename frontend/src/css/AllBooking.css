@@ -1,0 +1,10 @@
+.all--booking{
+    padding-top: 250px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.all--booking>table{
+    width: 80%;
+}
