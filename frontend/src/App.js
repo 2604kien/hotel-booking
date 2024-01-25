@@ -14,6 +14,7 @@ import AllRoom from "./components/Room/AllRoom";
 import ViewRoom from "./components/Room/ViewRoom";
 import AllBooking from "./components/Booking/AllBooking";
 import ViewBooking from "./components/Booking/ViewBooking";
+import EditRoom from "./components/Room/EditRoom";
 function App() {
   return (
     <div className="App">
@@ -25,6 +26,7 @@ function App() {
             <Route path="room" element={<AllRoom/>}/>
             <Route path="room/view/:id" element={<ViewRoom/>}/>
             <Route path="room/add" element={<AddRoom/>}/>
+            <Route path="room/edit/:id" element={<EditRoom/>}/>
             <Route path="booking/all" element={<AllBooking/>}/>
             <Route path="booking/:id" element={<ViewBooking/>}/>
             <Route path="user" element={<AllUser/>}/>
