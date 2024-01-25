@@ -12,12 +12,12 @@ export default function BookingTableCard(props){
     }
     return(
         <tr>
-            <td>{props.data.id}</td>
-            <td>{props.data.checkIn.split('T')[0].split('-').reverse().join('-')}</td>
-            <td>{props.data.checkOut.split('T')[0].split('-').reverse().join('-')}</td>
-            <td>{props.data.price}</td>
-            <td>{props.data.user.fullName}</td>
-            <td>{props.data.room.roomNumber}</td>
+            <td>{props.data.id?props.data.id:null}</td>
+            <td>{props.data.checkIn?props.data.checkIn.split('T')[0].split('-').reverse().join('-'):null}</td>
+            <td>{props.data.checkOut?props.data.checkOut.split('T')[0].split('-').reverse().join('-'):null}</td>
+            <td>{props.data.price?props.data.price:null}</td>
+            <td>{props.data.user?props.data.user.fullName:null}</td>
+            <td>{props.data.room?props.data.room.roomNumber:null}</td>
             <td><input type="checkbox" checked={props.data.isPaid} readOnly/></td>
             <td style={{
                 display:"flex",

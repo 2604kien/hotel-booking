@@ -22,7 +22,9 @@ export default function AllRoom(){
                         <button onClick={()=>navigate('/room/add')} className="small--btn">Add New Room</button>
                     </div>
                     <h1>All Room</h1>
-                        <table>
+                        <table style={{
+                        width:"60vw",
+                    }}>
                             <thead>
                                 <tr>
                                     <th>Room Number</th>
