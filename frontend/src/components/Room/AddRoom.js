@@ -59,10 +59,11 @@ export default function AddRoom(){
             }
         })
     }
-    const handleSubmit=(e)=>{
+    const handleSubmit=async(e)=>{
         e.preventDefault();
         
-        dispatch(createNewRoom({data: formData, files:fileArray, token:token}))
+        await dispatch(createNewRoom({data: formData, files:fileArray, token:token}))
+        window.location.reload();
         
     }
     const handleFile=(e)=>{
@@ -81,7 +82,6 @@ export default function AddRoom(){
             return prev;
         })
     }
-    
     return(
         <div className="add--category">
             <h1>Add New Room</h1>

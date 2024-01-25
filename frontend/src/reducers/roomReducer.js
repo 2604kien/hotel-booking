@@ -31,8 +31,9 @@ export const createNewRoom=createAsyncThunk('room/createNewRoom', async({data, f
         formData.append('files', file);
     });
     console.log(data)
-    const response=await axios.post(server+'room', data, config);
+    
     const response2=await axios.post(server+'room/upload', formData, config);
+    const response=await axios.post(server+'room', data, config);
     return response.data;
 })
 export const deleteRoom=createAsyncThunk('room/deleteRoom', async({id, token})=>{
