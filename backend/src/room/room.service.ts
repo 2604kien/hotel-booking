@@ -3,7 +3,8 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Room } from 'src/entities/room.entity';
 import { Repository } from 'typeorm';
 import { RoomDto } from './dto/room.dto';
-
+import * as fsPromise from 'fs/promises';
+import * as path from "path"
 @Injectable()
 export class RoomService {
     constructor(
@@ -78,6 +79,12 @@ export class RoomService {
         });
     }
     async deleteRoom(id:number):Promise<Object>{
+        const room=await this.roomRepository.findOne({
+            where:{
+                id:id
+            }
+        })
+        room.imageNames.map(async (name)=> await fsPromise.unlink(path.join(__dirname, "..","..", "public", "images", "room", name)));
         await this.roomRepository.delete(id);
         return {message:"Room detail is deleted successfully"}
     }

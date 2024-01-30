@@ -107,7 +107,7 @@ export default function AddRoom(){
                 </div>
                 <label htmlFor="room--detail">Room Detail:</label>
                 <textarea onChange={handleChange} name="roomDetail" value={formData.roomDetail} id="room--detail" required></textarea>
-                <div>
+                <div style={{width:"100%", display:"grid", gridTemplateColumns:"49% 49%", gap:"2%"}}>
                     {element2}    
                 </div>
                 
