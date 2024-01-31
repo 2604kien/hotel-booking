@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import logo from "../../images/hotel.png"
 import { filterRoom} from "../../reducers/roomReducer";
-import { logout, refresh, resetMessage } from "../../reducers/authReducer";
+import { logout, refresh} from "../../reducers/authReducer";
 import {admin} from "../../config/role"
 import { getUserById } from "../../reducers/userReducer";
 export default function Navbar(){
@@ -55,7 +55,7 @@ export default function Navbar(){
             navigate('/');
             dispatch(filterRoom(filterData));
         }
-    },[JSON.stringify(searchData)])
+    },[JSON.stringify(searchData), dispatch, navigate, searchData.length])
     return (
         <div className="nav--bar">
             <ul className="top--nav">
@@ -65,7 +65,7 @@ export default function Navbar(){
                     alignItems:"center",
                     justifyContent:"center",
                     gap:"10px"
-                }}><img src={logo} style={{width:"50px"}}/> <p>ROYAL</p></li>
+                }}><img src={logo} style={{width:"50px"}} alt="royal hotel icon"/> <p>ROYAL</p></li>
                 <div style={{
                     display:"flex",
                     flexDirection:"row",
