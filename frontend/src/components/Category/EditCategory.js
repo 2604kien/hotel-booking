@@ -18,7 +18,10 @@ export default function EditCategory(){
         dispatch(getOneCategory(id));
     },[id, dispatch])
     React.useEffect(()=>{
-        setFormData(currCategory);
+        if(currCategory){
+            setFormData(currCategory);
+        }
+        
     }, [currCategory])
     const handleChange=(e)=>{
         const {name, value}=e.target;

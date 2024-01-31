@@ -32,7 +32,7 @@ export const createNewRoom=createAsyncThunk('room/createNewRoom', async({data, f
     });
     console.log(data)
     
-    const response2=await axios.post(server+'room/upload', formData, config);
+    await axios.post(server+'room/upload', formData, config);
     const response=await axios.post(server+'room', data, config);
     return response.data;
 })
@@ -43,6 +43,15 @@ export const deleteRoom=createAsyncThunk('room/deleteRoom', async({id, token})=>
         }
     }
     const response=await axios.delete(server+`room/${id}`, config);
+    return response.data;
+})
+export const updateRoomById=createAsyncThunk('room/updateRoomById', async({id, data, token})=>{
+    const config={
+        headers:{
+            authorization:`Bearer ${token}`
+        }
+    }
+    const response=await axios.put(server+`room/${id}`, data, config)
     return response.data;
 })
 const roomSlice=createSlice({
