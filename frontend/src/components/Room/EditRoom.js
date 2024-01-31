@@ -2,7 +2,7 @@ import React from "react";
 import "../../css/EditRoom.css";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
-import { getRoomById } from "../../reducers/roomReducer";
+import { getRoomById, updateRoomById } from "../../reducers/roomReducer";
 export default function EditRoom(){
     const {id}=useParams();
     const dispatch=useDispatch();
@@ -31,11 +31,15 @@ export default function EditRoom(){
             }
         })
     }
-
+    const handleSubmit=async(e)=>{
+        e.preventDefault();
+        await dispatch(updateRoomById({id, token, data:room}));
+        window.location.reload();
+    }
     return(
         <div className="add--category">
             <h1>Edit Room</h1>
-            <form className="add--category--form" >
+            <form className="add--category--form" onSubmit={handleSubmit}>
                 <label htmlFor="room--number">Room Number:</label>
                 <input onChange={handleChange} id="room--number" name="roomNumber" value={room.roomNumber} type="number" placeholder="Enter room number..." required/>
                 <label htmlFor="room--number">Room Price/night:</label>
