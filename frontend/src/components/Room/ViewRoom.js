@@ -29,7 +29,7 @@ export default function ViewRoom(){
             </div>
             <div className="detail--payment">
                     <div className="displayFlexCenter" style={{alignItems:"flex-start", height:"100%", paddingBottom:"50px", borderRadius:"15px"}}>
-                        <h2>Room {roomData?(roomData.roomNumber + " | "+roomData.category.name):""}</h2>
+                        <h1>Room {roomData?(roomData.roomNumber + " | "+roomData.category.name):""}</h1>
                         <hr style={{color:"black", width:"100%"}}/>
                         <p>{roomData.roomDetail}</p>
                         <p>{roomData.category?roomData.category.description:""}</p>

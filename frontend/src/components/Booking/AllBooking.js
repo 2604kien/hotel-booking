@@ -15,6 +15,7 @@ export default function AllBooking(){
 
     return(
         <div className='all--booking'>
+            <h1>All Booking</h1>
             <table>
                 <thead>
                     <tr>

@@ -68,7 +68,7 @@ export default function BookingCard(props){
                 <button onClick={handleSubmit} className="reserve--button">Make Booking</button>
                 {days>0&&<h3 style={{textDecoration:"underline"}}>Price: <span style={{fontWeight:"400"}}>${props.price} AUD/day x {days} day(s)</span></h3>}
             </div>
-            <p style={{textAlign:"center"}}>Enter dates to check the total trip price, including additional fees and any taxes.</p>
+            <p style={{textAlign:"center", fontStyle:"italic"}}>Enter dates to check the total trip price, including additional fees and any taxes.</p>
         </div>
     )
 }

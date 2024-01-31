@@ -2,8 +2,8 @@
     padding-top: 250px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
+    min-height: 600px;
 }
 .all--booking>table{
     width: 80%;

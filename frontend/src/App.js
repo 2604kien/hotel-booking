@@ -1,5 +1,4 @@
 import {Routes, Route} from "react-router-dom"
-import Navbar from "./components/Layout/Navbar";
 import Error404 from "./components/Error404";
 import HomePage from "./components/HomePage/HomePage";
 import Category from "./components/Category/Category";
@@ -15,11 +14,12 @@ import ViewRoom from "./components/Room/ViewRoom";
 import AllBooking from "./components/Booking/AllBooking";
 import ViewBooking from "./components/Booking/ViewBooking";
 import EditRoom from "./components/Room/EditRoom";
+import Layout from "./components/Layout/Layout";
 function App() {
   return (
     <div className="App">
         <Routes>
-          <Route path="*" element={<Navbar/>}>
+          <Route path="*" element={<Layout/>}>
             <Route path="" element={<HomePage/>}/>
             <Route path="register" element={<Register/>}/>
             <Route path="login" element={<Login/>}/>
