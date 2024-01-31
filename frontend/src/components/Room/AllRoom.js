@@ -14,7 +14,7 @@ export default function AllRoom(){
     const data= roles.includes(admin)?(<div className="add--category">
                     
                     <div style={{
-                        width:"60vw",
+                        width:"60%",
                         display:"flex",
                         justifyContent:"flex-end",
                         marginTop:"50px",
@@ -23,13 +23,12 @@ export default function AllRoom(){
                     </div>
                     <h1>All Room</h1>
                         <table style={{
-                        width:"60vw",
+                        width:"60%",
                     }}>
                             <thead>
                                 <tr>
                                     <th>Room Number</th>
                                     <th>Room Detail</th>
-                                    <th>Room Photo Name</th>
                                     <th>Room Category</th>
                                     <th>Action</th>
                                 </tr>

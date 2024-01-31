@@ -48,8 +48,8 @@ textarea{
 }
 .table{
     border-collapse: collapse;
-    margin: 20px 20vw;
-    width: 60vw;
+    margin: 20% 20%;
+    width: 60%;
     border-radius: 15px;
     overflow: hidden;
     box-shadow: 0 0 20px rgba(0,0,0,0.25);
