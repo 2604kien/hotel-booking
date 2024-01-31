@@ -1,6 +1,6 @@
 import React from "react";
 import "../../css/ViewRoom.css"
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams} from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getRoomById } from "../../reducers/roomReducer";
 import { server } from "../../config/serverURL";
@@ -8,17 +8,16 @@ import BookingCard from "../Booking/BookingCard";
 export default function ViewRoom(){
     const {id}=useParams();
     const dispatch=useDispatch();
-    const navigate=useNavigate();
     const token=useSelector(state=>state.auth.token);
     const roomData=useSelector(state=>state.room.currRoom);
-    const element=roomData?roomData.imageNames.map(el=><img key={Math.random()*1000} style={{overflow:"hidden", borderRadius:"15px", transition:"all 0.5s ease", width:"100%"}} src={`${server}/images/room/${el}`}/>):<></>
+    const element=roomData?roomData.imageNames.map(el=><img key={Math.random()*1000} style={{overflow:"hidden", borderRadius:"15px", transition:"all 0.5s ease", width:"100%"}} src={`${server}/images/room/${el}`} alt="room view"/>):<></>
     React.useEffect(()=>{
         dispatch(getRoomById({id:id, token:token}));
     },[dispatch, token, id]);
     return(
         <div style={{display:"flex", flexDirection:"column", justifyContent:"center", alignItems:"center"}}>
             <div className="view--room">       
-                    <img style={{overflow:"hidden", borderRadius:"15px", transition:"all 0.5s ease", width:"100%"}} src={roomData?`${server}/images/room/${roomData.imageNames[0]}`:""}/>
+                    <img style={{overflow:"hidden", borderRadius:"15px", transition:"all 0.5s ease", width:"100%"}} src={roomData?`${server}/images/room/${roomData.imageNames[0]}`:""} alt="room view"/>
                    <div className="alt--image--info">
                        {roomData.imageNames && roomData.imageNames.length>1? (<div className="image--grid">
                             {element}
