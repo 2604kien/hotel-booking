@@ -19,6 +19,7 @@ export default function Navbar(){
     const filterData=roomItems && Array.isArray(roomItems)?roomItems.filter(room=>Object.values(room).filter(el=>JSON.stringify(el).toLowerCase().includes(searchData.toLowerCase())).length>0):[]
     const categoryItems=useSelector(state=>state.category.entities);
     const dispatch=useDispatch();
+    const [isDrop, setIsDrop]=React.useState(false);
     const element=categoryItems && Array.isArray(categoryItems)?categoryItems.map(el=><li style={{
         backgroundColor:(Number(id)===el.id)?"rgba(224, 82, 82, 0.5)":"white",
         color:(Number(id)===el.id)?"white":"rgba(224, 82, 82, 0.5)"
@@ -47,6 +48,48 @@ export default function Navbar(){
         await dispatch(logout());
         navigate('/login');
     }
+    const navElement=(isAuthenticated ?<div className={isDrop?"column--menu open":"column--menu"} style={{
+        display:"flex",
+        flexDirection:"column",
+        alignItems:"center",
+        justifyContent:"center",
+        gap:"20px",
+        fontSize:"1.5rem",
+        cursor:"pointer",
+        border:"1px solid black",
+        background:"white",
+        top:"100px",
+        padding:"20px",
+        borderRadius:"15px",
+        width:"200px",
+        right:"300px"
+    }}>
+        {roles.includes(admin)?<>
+            <li onClick={()=>navigate('/category')}>Category</li>                        
+            <li onClick={()=>navigate('/room')}>Room</li>
+            <li onClick={()=>navigate('booking/all')}>Booking</li>
+            <li onClick={()=>navigate('/user')}>User</li>
+            <li onClick={handleLogout}>Logout</li>
+        </>:<li onClick={handleLogout}>Logout</li>}
+    </div>:<div  className={isDrop?"column--menu open":"column--menu"} style={{
+        display:"flex",
+        flexDirection:"column",
+        alignItems:"center",
+        justifyContent:"center",
+        gap:"20px",
+        fontSize:"1.5rem",
+        cursor:"pointer",
+        border:"1px solid black",
+        background:"white",
+        top:"100px",
+        padding:"20px",
+        borderRadius:"15px",
+        width:"200px",
+        right:"300px"
+    }}>
+        <li onClick={()=>navigate('/login')}>Login</li>
+        <li onClick={()=>navigate('/register')}>Register</li>
+    </div>)
     React.useEffect(()=>{
         dispatch(refresh());
         dispatch(getUserById());
@@ -55,9 +98,14 @@ export default function Navbar(){
             navigate('/');
             dispatch(filterRoom(filterData));
         }
-    },[JSON.stringify(searchData), dispatch, navigate, searchData.length])
+    },[JSON.stringify(searchData), dispatch, navigate, searchData.length]);
+    const handleDropdown=(e)=>{
+        
+        setIsDrop(prev=>!prev);
+    }
     return (
         <div className="nav--bar">
+          
             <ul className="top--nav">
                 <li onClick={()=>navigate('/')} style={{
                     display:"flex",
@@ -84,36 +132,19 @@ export default function Navbar(){
                         width:"400px"
                     }} type="text" value={searchData} onChange={handleChange} placeholder="Search..."/>
                 </div>
+                <div></div>
+                <div style={{display:"flex", flexDirection:"column", justifyContent:"center", alignItems:"flex-end", gap:"20px", position:"absolute", top:47, right:"10%"}}>
                 <div >
-                    {isAuthenticated ?<div style={{
-                    display:"flex",
-                    flexDirection:"row",
-                    alignItems:"center",
-                    justifyContent:"center",
-                    gap:"20px",
-                    fontSize:"1.5rem",
-                    cursor:"pointer"  
-                }}>
-                    {roles.includes(admin)?<>
-                        <li onClick={()=>navigate('/category')}>Category</li>                        
-                        <li onClick={()=>navigate('/room')}>Room</li>
-                        <li onClick={()=>navigate('booking/all')}>Booking</li>
-                        <li onClick={()=>navigate('/user')}>User</li>
-                        <li onClick={handleLogout}>Logout</li>
-                    </>:<li onClick={handleLogout}>Logout</li>}
-                </div>:<div style={{
-                    display:"flex",
-                    flexDirection:"row",
-                    alignItems:"center",
-                    justifyContent:"center",
-                    gap:"20px",
-                    fontSize:"1.5rem",
-                    cursor:"pointer" 
-                }}>
-                    <li onClick={()=>navigate('/login')}>Login</li>
-                    <li onClick={()=>navigate('/register')}>Register</li>
-                </div>}
-                    
+                    <label className="burger" htmlFor="burger" >
+                        <input type="checkbox" id="burger" onClick={handleDropdown}/>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </label>
+                </div>
+                <div style={{ visibility:isDrop?"visible":"hidden"}}>
+                   {navElement}
+                </div>
                 </div>
             </ul>
             <ul className="bottom--nav">
