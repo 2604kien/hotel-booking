@@ -17,7 +17,7 @@ export default function ViewBooking(){
             <h3>Id:</h3> <h3>{currBooking.id?currBooking.id:null}</h3>
             <h3>Check In:</h3><h3>{currBooking.checkIn?currBooking.checkIn.split('T')[0].split('-').reverse().join('-'):null}</h3>
             <h3>Check Out:</h3><h3>{currBooking.checkOut?currBooking.checkOut.split('T')[0].split('-').reverse().join('-'):null}</h3>
-            <h3>Total Price:</h3> <h3>{currBooking.price?currBooking.price:null}</h3>
+            <h3>Total Price:</h3> <h3>${currBooking.price?currBooking.price:null}</h3>
             <h3>User Full Name:</h3><h3>{currBooking.user?currBooking.user.fullName:null}</h3>
             <h3>Room Number:</h3><h3>{currBooking.room?currBooking.room.roomNumber:null}</h3>
             <h3>User Email:</h3><h3>{currBooking.user?currBooking.user.email:null}</h3>

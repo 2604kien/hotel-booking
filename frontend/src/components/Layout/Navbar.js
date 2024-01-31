@@ -1,4 +1,3 @@
-import { Outlet } from "react-router-dom"
 import React from "react";
 import {useDispatch, useSelector} from "react-redux";
 import "../../css/Navbar.css";
@@ -58,7 +57,6 @@ export default function Navbar(){
         }
     },[JSON.stringify(searchData)])
     return (
-        <>
         <div className="nav--bar">
             <ul className="top--nav">
                 <li onClick={()=>navigate('/')} style={{
@@ -122,7 +120,5 @@ export default function Navbar(){
                 {element}
             </ul>
         </div>
-        <Outlet/>
-        </>
     )
 }
