@@ -3,7 +3,12 @@ import axios from "axios";
 import { server } from "../config/serverURL";
 const categoryAdapter=createEntityAdapter();
 const initialState=categoryAdapter.getInitialState({
-    currCategory:"",
+    currCategory:{
+        name:"",
+        description:"",
+        id:"",
+        roomList:[]
+    },
     message:""
 });
 
