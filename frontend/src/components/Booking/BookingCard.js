@@ -56,11 +56,11 @@ export default function BookingCard(props){
             <h2 style={{textAlign:"center"}}>{element}</h2>
             <form style={{display: "grid", gridTemplateColumns:"49% 49%", gap:"2%", border:"1px solid black",padding:"10px", borderRadius:"15px", borderColor:"#666"}}>
                 <div className="displayFlexCenter" style={{borderRight:"1px solid black"}}>
-                    <label style={{fontSize:"0.8rem", marginBottom:"5px"}} htmlFor="checkIn">CHECK-IN</label>
+                    <label style={{ fontWeight:"600", fontSize:"0.8rem", marginBottom:"5px"}} htmlFor="checkIn">CHECK-IN</label>
                     <input style={{width:"80%", textIndent:"2px", outline:"none", fontSize:"1rem"}} onChange={handleChange} value={formData.checkIn} min={new Date().toISOString().split('T')[0]} type="date" id="checkIn" name="checkIn"/>
                 </div>
                 <div className="displayFlexCenter" style={{paddingLeft:"20px"}}>
-                    <label  style={{fontSize:"0.8rem",  marginBottom:"5px"}} htmlFor="checkOut">CHECK-OUT</label>
+                    <label  style={{ fontWeight:"600", fontSize:"0.8rem",  marginBottom:"5px"}} htmlFor="checkOut">CHECK-OUT</label>
                     <input style={{width:"80%", textIndent:"2px", outline:"none", fontSize:"1rem"}} onChange={handleChange} value={formData.checkOut} min={formData.checkIn?formData.checkIn:new Date().toISOString().split('T')[0]} type="date" id="checkOut" name="checkOut"/>
                 </div>
             </form>
