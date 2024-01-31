@@ -34,6 +34,16 @@ export const deleteCategory=createAsyncThunk('category/deleteCategory', async({i
     const response=await axios.delete(server+`category/${id}`, config)
     return response.data;
 })
+export const editCategory=createAsyncThunk('category/editCategory', async({data, token, id})=>{
+    const config={
+        headers:{
+            authorization: `Bearer ${token}`
+        }
+    }
+    const response=await axios.put(server+`category/${id}`, data, config);
+    return response.data;
+
+})
 const categorySlice=createSlice({
     name:'category',
     initialState: initialState,

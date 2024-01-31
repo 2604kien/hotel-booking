@@ -1,7 +1,7 @@
 import React from "react";
 import "../../css/EditCategory.css";
 import { useDispatch, useSelector } from "react-redux";
-import { getOneCategory } from "../../reducers/categoryReducer";
+import { editCategory, getOneCategory } from "../../reducers/categoryReducer";
 import { useParams } from "react-router-dom";
 export default function EditCategory(){
     const dispatch=useDispatch();
@@ -13,7 +13,7 @@ export default function EditCategory(){
         roomList:[]
     })
     const {id}=useParams();
-    console.log(currCategory);
+    const token=useSelector(state=>state.auth.token);
     React.useEffect(()=>{
         dispatch(getOneCategory(id));
     },[id, dispatch])
@@ -29,11 +29,15 @@ export default function EditCategory(){
             }
         })
     }
-    
+    const handleSubmit=async (e)=>{
+        e.preventDefault();
+        await dispatch(editCategory({data: formData, token: token, id: id}));
+        window.location.reload();
+    }
     return(
         <div className="add--category">
         <h1>Edit Category</h1>
-        <form className="add--category--form" >
+        <form className="add--category--form" onSubmit={handleSubmit} >
            
             <label htmlFor="name">Category Name:</label>
             <input onChange={handleChange} id="name" name="name" value={formData.name} required/>
