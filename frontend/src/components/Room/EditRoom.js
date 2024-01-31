@@ -31,9 +31,7 @@ export default function EditRoom(){
             }
         })
     }
-    const handleSubmit=async()=>{
-        await dispatch()
-    }
+
     return(
         <div className="add--category">
             <h1>Edit Room</h1>

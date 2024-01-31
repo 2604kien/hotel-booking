@@ -14,7 +14,6 @@ export default function RoomTableCard(props){
         <tr>
             <td>{props.data.roomNumber}</td>
             <td>{props.data.roomDetail}</td>
-            <td>{props.data.imagesNames}</td>
             <td>{props.data.category.name}</td>
             <td><div style={{
                 display:"flex",

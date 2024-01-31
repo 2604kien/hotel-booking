@@ -4,7 +4,7 @@
     width: 100%;
     flex-direction: column;
     align-items: flex-start;
-    height: 500px;
+    min-height: 530px;
     transition: all 0.5s ease;
     border-radius: 15px;
     cursor: pointer;

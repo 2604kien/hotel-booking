@@ -14,7 +14,6 @@ export default function RoomCard(props){
         if(currIMG<=0) setCurrIMG(props.data.imageNames.length-1);
         else setCurrIMG(prev=> prev-1);
     }
-    console.log(props.data.imageNames)
     const element=props.data.isDisplay?(
         <div className="roomCard" >
             {props.data.imageNames.length>1&&<div className="arrow">
