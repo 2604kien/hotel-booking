@@ -15,6 +15,7 @@ import AllBooking from "./components/Booking/AllBooking";
 import ViewBooking from "./components/Booking/ViewBooking";
 import EditRoom from "./components/Room/EditRoom";
 import Layout from "./components/Layout/Layout";
+import EditCategory from "./components/Category/EditCategory";
 function App() {
   return (
     <div className="App">
@@ -34,6 +35,7 @@ function App() {
             <Route path="category" element={<ViewAllCategory/>}/>
             <Route path="category/:id" element={<Category/>}/>
             <Route path="category/add" element={<AddCategory/>}/>
+            <Route path="category/edit/:id" element={<EditCategory/>}/>
             <Route path="*" element={<Error404/>}/>
           </Route>
         </Routes>
