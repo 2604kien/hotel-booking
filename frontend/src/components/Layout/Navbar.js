@@ -48,12 +48,11 @@ export default function Navbar(){
         await dispatch(logout());
         navigate('/login');
     }
-    const navElement=(isAuthenticated ?<div className={isDrop?"column--menu open":"column--menu"} style={{
+    const navElement=(isAuthenticated ?<div className={isDrop && roles.includes(admin)?"column--menu open--admin":isDrop && !roles.includes(admin)?"column--menu open--user":"column--menu"} style={{
         display:"flex",
         flexDirection:"column",
         alignItems:"center",
         justifyContent:"center",
-        gap:"20px",
         fontSize:"1.5rem",
         cursor:"pointer",
         border:"1px solid black",
@@ -76,7 +75,6 @@ export default function Navbar(){
         flexDirection:"column",
         alignItems:"center",
         justifyContent:"center",
-        gap:"20px",
         fontSize:"1.5rem",
         cursor:"pointer",
         border:"1px solid black",
@@ -142,7 +140,7 @@ export default function Navbar(){
                         <span></span>
                     </label>
                 </div>
-                <div style={{ visibility:isDrop?"visible":"hidden"}}>
+                <div className="list" style={{ visibility:isDrop?"visible":"hidden"}}>
                    {navElement}
                 </div>
                 </div>
