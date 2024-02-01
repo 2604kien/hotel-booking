@@ -4,10 +4,9 @@
     flex-direction: column;
     align-items: center;
     min-height: 600px;
-}
-.all--booking>table{
     width: 80%;
 }
+
 .view--booking--grid{
     width: 60%;
     display: grid;
