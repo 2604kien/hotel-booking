@@ -3,7 +3,7 @@ import {useDispatch, useSelector} from "react-redux";
 import "../../css/Navbar.css";
 import { getAllCategory } from "../../reducers/categoryReducer";
 import { useNavigate } from "react-router-dom";
-import { useParams } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 import logo from "../../images/hotel.png"
 import { filterRoom} from "../../reducers/roomReducer";
 import { logout, refresh} from "../../reducers/authReducer";
@@ -12,6 +12,8 @@ import { getUserById } from "../../reducers/userReducer";
 export default function Navbar(){
     const navigate=useNavigate();
     const {id}=useParams();
+    const {pathname}=useLocation();
+    console.log(pathname);
     const isAuthenticated=useSelector(state=>state.auth.isAuthenticated);
     const roles=useSelector(state=>state.auth.roles);
     const roomItems=useSelector(state=>state.room.clone);
@@ -21,8 +23,8 @@ export default function Navbar(){
     const dispatch=useDispatch();
     const [isDrop, setIsDrop]=React.useState(false);
     const element=categoryItems && Array.isArray(categoryItems)?categoryItems.map(el=><li style={{
-        backgroundColor:(Number(id)===el.id)?"rgba(224, 82, 82, 0.5)":"white",
-        color:(Number(id)===el.id)?"white":"rgba(224, 82, 82, 0.5)"
+        backgroundColor:(Number(id)===el.id)&&pathname.includes("category")?"rgba(224, 82, 82, 0.5)":"white",
+        color:(Number(id)===el.id)&&pathname.includes("category")?"white":"rgba(224, 82, 82, 0.5)"
     }} onClick={()=>navigate(`category/${el.id}`)} className="nav--category" key={el.id}>{el.name}</li>):(<></>)
     const token=useSelector(state=>state.auth.token)
     React.useEffect(()=>{
