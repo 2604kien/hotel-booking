@@ -13,7 +13,7 @@ import * as path from "path";
   imports: [
     TypeOrmModule.forRoot({
       type:"postgres",
-      host: 'localhost',
+      host: 'booking-db',
       port: 5432,
       username:"postgres",
       password: '26042001',
