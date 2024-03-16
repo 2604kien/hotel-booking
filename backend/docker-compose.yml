@@ -1,5 +1,12 @@
-version: '3.8'
 services:
+  hotel-api:
+    build: .
+    ports:
+      - 3500:3500
+    environment:
+      - JWT_TOKEN_SECRET="e2bcbb591b0bd03ec1cae7ed467b1f509faf3057dd41662654964d1d1b22079f8442e4ed56be7a63bf528715a7797406c245bd38b463269d342e50cf6480d605"
+    volumes:
+      - ./src:/user/src/app/src
   booking-db:
     container_name: hotel-booking
     image: postgres:16
