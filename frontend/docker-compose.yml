@@ -1,0 +1,7 @@
+services:
+  hotel-frontend:
+    build: .
+    ports:
+      - 3000:3000
+    volumes:
+      - ./src:/user/src/app/src
